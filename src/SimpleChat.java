@@ -66,17 +66,19 @@ public class SimpleChat extends JFrame implements ISimpleChat {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                while (true) {
-                    String msg = clientFrame.getMsg();
-                    if (clientFrame.getAdress() != null && clientFrame.getPort() != 0 && msg != null) {
-                        try {
+                try {
+                    while (true) {
+                        Thread.sleep(1000);
+                        String msg = clientFrame.getMsg();
+                        if (clientFrame.getAdress() != null && clientFrame.getPort() != 0 && msg != null) {
+
                             socket = new Socket(clientFrame.getAdress(), clientFrame.getPort());
                             sendMessage(msg);
                             clientFrame.setMsg(null);
-                        } catch (IOException | ChatException e) {
-                            e.printStackTrace();
                         }
                     }
+                } catch (IOException | ChatException | InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
         }).start();
