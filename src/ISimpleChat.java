@@ -4,7 +4,7 @@ public interface ISimpleChat extends AutoCloseable{
 
     void client() throws ChatException;
     void server() throws ChatException;
-    String getMessage() throws ChatException;
+    void getMessage() throws ChatException;
     void sendMessage(String message) throws ChatException;
 
     @Override
